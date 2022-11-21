@@ -1,0 +1,22 @@
+# Autor: Daniel Esteban Molina Sanchez
+# Fecha: 20 de Noviembre de 2022
+# Tema: Alto rendimiento con Cython
+# Archivo: Makefile para ejecutar los archivos
+# 
+
+GCC = gcc
+GFLAGS = -ansi -pedantic -Wall -std=c99 -D_POSIX_C_SOURCE=199309L
+PROGRAMAS = mm_main_int mm_main_int_rmd 
+
+Benchmark_VDT:
+	$(GCC) $(GFLAGS) -c $@.py
+	$(GCC) $(GFLAGS) -c mm_lib.c
+	$(GCC) $(GFLAGS) -o $@ $@.o mm_lib.o
+	
+mm_main_int_rmd:
+	$(GCC) $(GFLAGS) -c $@.c
+	$(GCC) $(GFLAGS) -c mm_lib.c
+	$(GCC) $(GFLAGS) -o $@ $@.o mm_lib.o
+
+clean:
+	$(RM) *.o  $(PROGRAMAS)
